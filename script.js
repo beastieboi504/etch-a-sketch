@@ -24,7 +24,7 @@ for(let i = 0; i < 16; i++){
             square.style.backgroundColor = chosenColor;
             isDrawing = true;
         })
-        square.addEventListener('mouseup', () => isDrawing = false)
+        document.addEventListener('mouseup', () => isDrawing = false)
         square.addEventListener('mouseover', (e) => {
             if(isDrawing == true){
                 e.preventDefault()
@@ -70,7 +70,7 @@ gridBtn.addEventListener('click', (e) => {
                 square.style.backgroundColor = chosenColor;
                 isDrawing = true;
             })
-        square.addEventListener('mouseup', () => isDrawing = false)
+        document.addEventListener('mouseup', () => isDrawing = false)
         square.addEventListener('mouseover', (e) => {
             if(isDrawing == true){
                 e.preventDefault()
