@@ -19,8 +19,17 @@ for(let i = 0; i < 16; i++){
         let square = document.createElement('div');
         square.classList.add('square');
         row.appendChild(square);
-        square.addEventListener('mouseover', (e) => {
+        square.addEventListener('mousedown', (e) => {
+            e.preventDefault()
             square.style.backgroundColor = chosenColor;
+            isDrawing = true;
+        })
+        square.addEventListener('mouseup', () => isDrawing = false)
+        square.addEventListener('mouseover', (e) => {
+            if(isDrawing == true){
+                e.preventDefault()
+                square.style.backgroundColor = chosenColor;
+            }
         });
     }
 }
@@ -29,9 +38,12 @@ gridBtn.addEventListener('click', (e) => {
     let newGridSize = prompt("Enter Grid Dimension: ");
     if(newGridSize != null){
         newGridSize = Number(newGridSize);
-        if(newGridSize > 100){
+        while(newGridSize > 100){
             newGridSize = prompt('Grid Dimension too high to be rendered; Enter lower Grid Dimension: ');
             newGridSize = Number(newGridSize);
+            if(newGridSize == null){
+                return;
+            }
         }while(Number.isNaN(newGridSize)){
             newGridSize = prompt('Invalid input. Enter valid Grid Dimension: ');
             if(newGridSize == null){
@@ -53,9 +65,18 @@ gridBtn.addEventListener('click', (e) => {
             let square = document.createElement('div');
             square.classList.add('square');
             row.appendChild(square);
-            square.addEventListener('mouseover', (e) => {
+            square.addEventListener('mousedown', (e) => {
+                e.preventDefault()
                 square.style.backgroundColor = chosenColor;
-            });
+                isDrawing = true;
+            })
+        square.addEventListener('mouseup', () => isDrawing = false)
+        square.addEventListener('mouseover', (e) => {
+            if(isDrawing == true){
+                e.preventDefault()
+                square.style.backgroundColor = chosenColor;
+            }
+        });
         }
     }
 });
