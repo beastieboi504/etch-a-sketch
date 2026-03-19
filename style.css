@@ -1,0 +1,146 @@
+@font-face {
+    font-family: gameover;
+    src: url(font/Pixel\ Game.otf) format('truetype');
+}
+
+body{
+    background-color: #181818;
+    color: rgb(62, 166, 255);
+    font-family: gameover, sans-serif;
+}
+.header{
+    width: 100%;
+    text-align: center;
+    margin-top: 50px;
+}
+.hero{
+    display: flex;
+    justify-content: space-around;
+}
+.menu{
+    background-color: #202020;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 350px;
+    margin-left: 40px;
+    font-family: sans-serif;
+    font-weight: light;
+    height: 460px;
+}
+.menu-header{
+    text-align: center;
+    width: 100%;
+    box-shadow: 
+        0 2px 5px rgba(0,0,0,0.2),
+        0 5px 15px rgba(0,0,0,0.15);
+}
+.color-palette{
+    font-weight: bolder;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 30px;
+    margin-top: 20px;
+    
+}
+.color-picker-wrapper {
+    border: 2px solid rgb(62, 166, 255);
+    border-radius: 5px;
+    overflow: hidden; /* hide native inner styling */
+    cursor: pointer;
+    width: 100px;
+    height: 35px;
+    background-color: black;
+}
+
+.color-picker-wrapper input[type="color"] {
+    opacity: 0;   /* hide the native input */
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+.color-palette > input  {
+    -webkit-appearance: none;  /* remove Chrome/Safari native styles */
+    -moz-appearance: none;     /* remove Firefox native styles */
+    appearance: none;           /* standard reset */
+
+    border: 2px solid rgb(62, 166, 255); /* your desired border */
+    border-radius: 5px;        /* subtle rounded corners */
+    outline: none;             /* removes focus outline */
+
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    background: none;
+
+    box-shadow: none; 
+}         /* remove default background */
+        /* standard */
+
+.header > h1{
+    font-size: 60px;
+    font-weight: lighter;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 816px;
+    background-color: #181818;
+}
+.row{
+    display: flex;
+    width: 100%;
+    background-color: #181818;
+
+ }
+.square{
+    border: 1px solid black;
+    width: 40px;
+    height: 40px;
+    background-color: white;
+}
+.hover{
+    background-color: black;
+}
+#grid-btn{
+    height: 50px;
+}
+#color-picker{
+    height: 50px;
+    width: 100px;
+
+}
+.mode{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    margin-top: 30px;
+    gap: 10px;
+}
+.mode button{
+    background-color: #202020;
+    padding: 10px;
+    color: rgb(62, 166, 255);
+    border: 2px rgb(62, 166, 255) solid;
+    width: 70%;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.set-dimension{
+    display: flex;
+    justify-content: start;
+    width: 100%;
+    margin-top: 40px;
+
+}
+#grid-btn{
+    margin-left: 20px;
+    background-color: #202020;
+    border: 2px rgb(62, 166, 255) solid;
+    color: rgb(62, 166, 255);
+    font-weight: bold;
+    cursor: pointer;
+}
