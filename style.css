@@ -59,23 +59,10 @@ body{
     width: 100%;
     height: 100%;
     cursor: pointer;
-}
-.color-palette > input  {
-    -webkit-appearance: none;  /* remove Chrome/Safari native styles */
-    -moz-appearance: none;     /* remove Firefox native styles */
-    appearance: none;           /* standard reset */
-
-    border: 2px solid rgb(62, 166, 255); /* your desired border */
-    border-radius: 5px;        /* subtle rounded corners */
-    outline: none;             /* removes focus outline */
-
-    width: 40px;
-    height: 40px;
     padding: 0;
-    background: none;
-
-    box-shadow: none; 
-}         /* remove default background */
+    border-radius: 50px;
+}
+       /* remove default background */
         /* standard */
 
 .header > h1{
