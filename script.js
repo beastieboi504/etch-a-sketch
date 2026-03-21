@@ -9,7 +9,8 @@ let eraser = document.querySelector('#eraser')
 let wrapper = document.querySelector('.color-picker-wrapper');
 let rainbowModeClicked = false;
 let colorModeClicked = false;
-let clear = document.querySelector('.clear');
+let control = document.querySelectorAll('.control');
+let clear = document.querySelector('#clear');
 colorPick.addEventListener('input', (e) => {
     chosenColor = colorPick.value;
     wrapper.style.backgroundColor = colorPick.value;
@@ -22,6 +23,7 @@ for(let i = 0; i < 16; i++){
         let square = document.createElement('div');
         square.classList.add('square');
         row.appendChild(square);
+
         square.addEventListener('mousedown', (e) => {
             e.preventDefault()
             square.style.backgroundColor = chosenColor;
@@ -35,12 +37,50 @@ for(let i = 0; i < 16; i++){
                 square.style.backgroundColor = chosenColor;
             }
         });
-        colorMode.addEventListener(('click'), () => {
-            colorModeClicked = true;
+        colorMode.addEventListener('click', () => {
+            control.forEach(btn => {
+                btn.style.backgroundColor = '#202020';
+                btn.style.color = 'rgb(62, 166, 255)';
+            });
+
+            colorMode.style.backgroundColor = 'rgb(62, 166, 255)';
+            colorMode.style.color = '#202020';
+            
+            
+            
+            square.addEventListener('mousedown', (e) => {
+                e.preventDefault()
+                chosenColor = colorPick.value;
+                square.style.backgroundColor = chosenColor;
+                isDrawing = true;
+                console.log('color mode');
+            });
+            document.addEventListener('mouseup', () => isDrawing = false);
+            square.addEventListener('mouseover', (e) => {
+            if(isDrawing == true){
+                e.preventDefault();
+                chosenColor = colorPick.value;
+                square.style.backgroundColor = chosenColor;
+                }
+
+            });
+
+        }); 
+        clear.addEventListener('click', () => {
+            control.forEach(btn => {
+                btn.style.backgroundColor = '#202020';
+                btn.style.color = 'rgb(62, 166, 255)';
+            });
+            clear.style.backgroundColor = 'rgb(62, 166, 255)';
+            clear.style.color = '#202020';
+            square.style.backgroundColor = 'white';
         })
         rainbowMode.addEventListener(('click'), () => {
-            eraser.style.backgroundColor = '#202020';
-            eraser.style.color = 'rgb(62, 166, 255)';
+            control.forEach(btn => {
+                btn.style.backgroundColor = '#202020';
+                btn.style.color = 'rgb(62, 166, 255)';
+            });
+
             rainbowMode.style.backgroundColor = 'rgb(62, 166, 255)';
             rainbowMode.style.color = '#202020';
 
@@ -52,6 +92,7 @@ for(let i = 0; i < 16; i++){
                 e.preventDefault()
                 square.style.backgroundColor = chosenColor;
                 isDrawing = true;
+                console.log('rainbow mode');
             });
             document.addEventListener('mouseup', () => isDrawing = false);
             square.addEventListener('mouseover', (e) => {
@@ -66,12 +107,13 @@ for(let i = 0; i < 16; i++){
 
             });
             
-        })
-
+        });
+        
         eraser.addEventListener('click', () =>{
-            rainbowModeClicked = false;
-            rainbowMode.style.backgroundColor = '#202020';
-            rainbowMode.style.color = 'rgb(62, 166, 255)';
+            control.forEach(btn => {
+                btn.style.backgroundColor = '#202020';
+                btn.style.color = 'rgb(62, 166, 255)';
+            });
             eraser.style.backgroundColor = 'rgb(62, 166, 255)';
             eraser.style.color = '#202020';
             square.addEventListener('mousedown', (e) => {
@@ -85,6 +127,7 @@ for(let i = 0; i < 16; i++){
                 e.preventDefault();
                 square.style.backgroundColor = 'white';
                 }
+                console.log('eraser mode');
 
             });
         })
@@ -92,6 +135,10 @@ for(let i = 0; i < 16; i++){
 }
 
 gridBtn.addEventListener('click', (e) => {
+    eraser.style.backgroundColor = '#202020';
+    eraser.style.color = 'rgb(62, 166, 255)';   
+    rainbowMode.style.backgroundColor = '#202020';
+    rainbowMode.style.color = 'rgb(62, 166, 255)'; 
     let newGridSize = prompt("Enter Grid Dimension: ");
     if(newGridSize != null){
         newGridSize = Number(newGridSize);
@@ -130,6 +177,35 @@ gridBtn.addEventListener('click', (e) => {
                 square.style.backgroundColor = chosenColor;
                 isDrawing = true;
             });
+            colorMode.addEventListener('click', () => {
+            control.forEach(btn => {
+                btn.style.backgroundColor = '#202020';
+                btn.style.color = 'rgb(62, 166, 255)';
+            });
+
+            colorMode.style.backgroundColor = 'rgb(62, 166, 255)';
+                colorMode.style.color = '#202020';
+                
+                
+                
+                square.addEventListener('mousedown', (e) => {
+                    e.preventDefault()
+                    chosenColor = colorPick.value;
+                    square.style.backgroundColor = chosenColor;
+                    isDrawing = true;
+                    console.log('color mode');
+                });
+                document.addEventListener('mouseup', () => isDrawing = false);
+                square.addEventListener('mouseover', (e) => {
+                if(isDrawing == true){
+                    e.preventDefault();
+                    chosenColor = colorPick.value;
+                    square.style.backgroundColor = chosenColor;
+                    }
+
+                });
+
+            });
             rainbowMode.addEventListener(('click'), () => {
                 eraser.style.backgroundColor = '#202020';
                 eraser.style.color = 'rgb(62, 166, 255)';
@@ -155,7 +231,6 @@ gridBtn.addEventListener('click', (e) => {
                     chosenColor = `rgb(${r}, ${g}, ${b})`;
                     square.style.backgroundColor = chosenColor;
                     }
-
                 });
                 
             })
