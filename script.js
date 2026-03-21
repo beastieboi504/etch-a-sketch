@@ -7,7 +7,7 @@ let isDrawing = false;
 let colorMode = document.querySelector('#color-mode');
 let eraser = document.querySelector('#eraser')
 let wrapper = document.querySelector('.color-picker-wrapper');
-let currentmode = 'colorMode';
+let currentmode = '';
 let control = document.querySelectorAll('.control');
 let clear = document.querySelector('#clear');
 let colorModeOut = true;
@@ -51,6 +51,8 @@ for(let i = 0; i < 16; i++){
                 square.style.backgroundColor = chosenColor;
             }else if(currentmode == 'eraserMode'){
                 square.style.backgroundColor = 'white';
+            }else{
+                return;
             }
             
         })
