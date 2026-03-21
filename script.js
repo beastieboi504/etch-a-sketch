@@ -13,7 +13,9 @@ let clear = document.querySelector('#clear');
 let colorModeOut = true;
 let eraserModeOut = true;
 let rainbowModeOut = true;
-
+colorPick.addEventListener('input', (e) =>{
+    wrapper.style.backgroundColor = colorPick.value;
+})
 for(let i = 0; i < 16; i++){
     let row = document.createElement('div');
     row.classList.add('row');
@@ -183,109 +185,119 @@ gridBtn.addEventListener('click', (e) => {
 
     container.innerHTML = '';
     for(let i = 0; i < newGridSize; i++){
-        row = document.createElement('div');
+        let row = document.createElement('div');
         row.classList.add('row');
         container.appendChild(row);
         for(let j = 0; j < newGridSize; j++){
             let square = document.createElement('div');
             square.classList.add('square');
             row.appendChild(square);
-            square.addEventListener('mousedown', (e) => {
-                e.preventDefault()
-                square.style.backgroundColor = chosenColor;
-                isDrawing = true;
-            });
-            colorMode.addEventListener('click', () => {
-            control.forEach(btn => {
-                btn.style.backgroundColor = '#202020';
-                btn.style.color = 'rgb(62, 166, 255)';
-            });
-            clear.addEventListener('click', () => {
-                control.forEach(btn => {
-                    btn.style.backgroundColor = '#202020';
-                    btn.style.color = 'rgb(62, 166, 255)';
-                });
+            clear.addEventListener('mouseover', () => {
                 clear.style.backgroundColor = 'rgb(62, 166, 255)';
                 clear.style.color = '#202020';
+            })
+            clear.addEventListener('mouseout', (e) => {
+                clear.style.backgroundColor = '#202020';
+                clear.style.color = 'rgb(62, 166, 255)';
+            })
+            clear.addEventListener('click', () => {
                 square.style.backgroundColor = 'white';
-            });
-            colorMode.style.backgroundColor = 'rgb(62, 166, 255)';
-                colorMode.style.color = '#202020';
-                
-                
-                
-                square.addEventListener('mousedown', (e) => {
-                    e.preventDefault()
-                    chosenColor = colorPick.value;
-                    square.style.backgroundColor = chosenColor;
-                    isDrawing = true;
-                    console.log('color mode');
-                });
-                document.addEventListener('mouseup', () => isDrawing = false);
-                square.addEventListener('mouseover', (e) => {
-                if(isDrawing == true){
-                    e.preventDefault();
-                    chosenColor = colorPick.value;
-                    square.style.backgroundColor = chosenColor;
-                    }
-
-                });
-
-            });
-            rainbowMode.addEventListener(('click'), () => {
-                eraser.style.backgroundColor = '#202020';
-                eraser.style.color = 'rgb(62, 166, 255)';
-                rainbowMode.style.backgroundColor = 'rgb(62, 166, 255)';
-                rainbowMode.style.color = '#202020';
-
-                square.addEventListener('mousedown', (e) => {
-                    let r = Math.floor(Math.random() * 255);
-                    let g = Math.floor(Math.random() * 255);
-                    let b = Math.floor(Math.random() * 255);
-                    chosenColor = `rgb(${r}, ${g}, ${b})`;
-                    e.preventDefault()
-                    square.style.backgroundColor = chosenColor;
-                    isDrawing = true;
-                });
-                document.addEventListener('mouseup', () => isDrawing = false);
-                square.addEventListener('mouseover', (e) => {
-                if(isDrawing == true){
-                    e.preventDefault();
-                    let r = Math.floor(Math.random() * 255);
-                    let g = Math.floor(Math.random() * 255);
-                    let b = Math.floor(Math.random() * 255);
-                    chosenColor = `rgb(${r}, ${g}, ${b})`;
-                    square.style.backgroundColor = chosenColor;
-                    }
-                });
-                
             })
-            eraser.addEventListener('click', () =>{
-                rainbowMode.style.backgroundColor = '#202020';
-                rainbowMode.style.color = 'rgb(62, 166, 255)';
-                eraser.style.backgroundColor = 'rgb(62, 166, 255)';
-                eraser.style.color = '#202020';
-                square.addEventListener('mousedown', (e) => {
-                    e.preventDefault()
-                    square.style.backgroundColor = 'white';
-                    isDrawing = true;
-                });
-                document.addEventListener('mouseup', () => isDrawing = false);
-                square.addEventListener('mouseover', (e) => {
-                if(isDrawing == true){
-                    e.preventDefault();
-                    square.style.backgroundColor = 'white';
-                    }
-
-                });
-            })
-        document.addEventListener('mouseup', () => isDrawing = false)
-        square.addEventListener('mouseover', (e) => {
-            if(isDrawing == true){
+            square.addEventListener('mousedown', (e) => {
                 e.preventDefault()
-                square.style.backgroundColor = chosenColor;
-            }
-        });
+                
+                isDrawing = true;
+                if(currentmode == 'colorMode'){
+                    console.log('mousedown color');
+                    chosenColor = colorPick.value;
+                    square.style.backgroundColor = chosenColor;
+                }else if(currentmode == 'rainbowMode'){
+                    let r = Math.floor(Math.random() * 255);
+                    let g = Math.floor(Math.random() * 255);
+                    let b = Math.floor(Math.random() * 255);
+                    chosenColor = `rgb(${r}, ${g}, ${b})`;
+                    square.style.backgroundColor = chosenColor;
+                }else if(currentmode == 'eraserMode'){
+                    square.style.backgroundColor = 'white';
+                }
+                
+            })
+            document.addEventListener('mouseup', (e) => isDrawing = false)
+            square.addEventListener('mouseover', (e) => {
+                e.preventDefault()
+                if(isDrawing == true){
+                    if(currentmode == 'colorMode'){
+                        chosenColor = colorPick.value;
+                        square.style.backgroundColor = chosenColor;
+                    }else if(currentmode == 'rainbowMode'){
+                        let r = Math.floor(Math.random() * 255);
+                        let g = Math.floor(Math.random() * 255);
+                        let b = Math.floor(Math.random() * 255);
+                        chosenColor = `rgb(${r}, ${g}, ${b})`;
+                        square.style.backgroundColor = chosenColor;
+                    }else if(currentmode == 'eraserMode'){
+                        square.style.backgroundColor = 'white';
+                    }
+                }
+            })
         }
     }
+    colorMode.addEventListener('click', () => {
+        eraserModeOut = true;
+        rainbowModeOut = true;
+        control.forEach(btn => {
+            btn.style.backgroundColor = '#202020';
+            btn.style.color = 'rgb(62, 166, 255)';
+        });    
+
+        colorMode.style.backgroundColor = 'rgb(62, 166, 255)';
+        colorMode.style.color = '#202020';
+        currentmode = 'colorMode';
+        colorModeOut = false;
+
+    })
+    rainbowMode.addEventListener('click', () => {
+        eraserModeOut = true;
+        colorModeOut = true;
+        currentmode = 'rainbowMode';
+        control.forEach(btn => {
+            btn.style.backgroundColor = '#202020';
+            btn.style.color = 'rgb(62, 166, 255)';
+        });
+
+        rainbowMode.style.backgroundColor = 'rgb(62, 166, 255)';
+        rainbowMode.style.color = '#202020';
+        rainbowModeOut = false;
+    })
+    eraser.addEventListener('click', () => {
+        colorModeOut = true;
+        rainbowModeOut = true;  
+        currentmode = 'eraserMode';
+        control.forEach(btn => {
+            btn.style.backgroundColor = '#202020';
+            btn.style.color = 'rgb(62, 166, 255)';
+        });
+
+        eraser.style.backgroundColor = 'rgb(62, 166, 255)';
+        eraser.style.color = '#202020';
+        eraserModeOut = false;
+    })
+    colorMode.addEventListener('mouseout', (e) => {
+        if(colorModeOut){
+            colorMode.style.backgroundColor = '#202020';
+            colorMode.style.color = 'rgb(62, 166, 255)';
+        }   
+    })
+    rainbowMode.addEventListener('mouseout', (e) => {
+        if(rainbowModeOut){
+            rainbowMode.style.backgroundColor = '#202020';
+            rainbowMode.style.color = 'rgb(62, 166, 255)';
+        }
+    })
+    eraser.addEventListener('mouseout', (e) => {
+        if(eraserModeOut){
+            eraser.style.backgroundColor = '#202020';
+            eraser.style.color = 'rgb(62, 166, 255)';
+        }
+    })
 });
