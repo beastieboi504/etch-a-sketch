@@ -74,7 +74,7 @@ for(let i = 0; i < 16; i++){
             clear.style.backgroundColor = 'rgb(62, 166, 255)';
             clear.style.color = '#202020';
             square.style.backgroundColor = 'white';
-        })
+        });
         rainbowMode.addEventListener(('click'), () => {
             control.forEach(btn => {
                 btn.style.backgroundColor = '#202020';
@@ -182,7 +182,15 @@ gridBtn.addEventListener('click', (e) => {
                 btn.style.backgroundColor = '#202020';
                 btn.style.color = 'rgb(62, 166, 255)';
             });
-
+            clear.addEventListener('click', () => {
+                control.forEach(btn => {
+                    btn.style.backgroundColor = '#202020';
+                    btn.style.color = 'rgb(62, 166, 255)';
+                });
+                clear.style.backgroundColor = 'rgb(62, 166, 255)';
+                clear.style.color = '#202020';
+                square.style.backgroundColor = 'white';
+            });
             colorMode.style.backgroundColor = 'rgb(62, 166, 255)';
                 colorMode.style.color = '#202020';
                 
